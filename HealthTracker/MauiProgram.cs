@@ -30,6 +30,8 @@ public static class MauiProgram
         builder.Services.AddTransient<PastJournalsViewModel>();
         builder.Services.AddTransient<TodoViewModel>();
         builder.Services.AddTransient<TodoItemDetailViewModel>();
+        builder.Services.AddTransient<ResultsViewModel>();
+        builder.Services.AddTransient<HealthResultsViewModel>();
 
         // Register Views
         builder.Services.AddTransient<MentalHealthPage>();
@@ -39,6 +41,8 @@ public static class MauiProgram
         builder.Services.AddTransient<PastJournalsPage>();
         builder.Services.AddTransient<TodoPage>();
         builder.Services.AddTransient<TodoItemDetailPage>();
+        builder.Services.AddTransient<ResultsPage>();
+        builder.Services.AddTransient<HealthResultsPage>();
 
 
         return builder.Build();
