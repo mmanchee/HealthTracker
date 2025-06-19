@@ -59,6 +59,11 @@ namespace HealthTracker.Services
             await InitializeAsync();
             return await _database.InsertAsync(entry);
         }
+        public async Task<List<MentalHealthEntry>> GetAllMentalHealthEntriesAsync()
+        {
+            await InitializeAsync();
+            return await _database.Table<MentalHealthEntry>().OrderByDescending(e => e.CreateDate).ToListAsync();
+        }
 
         // --- Physical Health Methods ---
         public async Task<int> SavePhysicalHealthEntryAsync(PhysicalHealthEntry entry)
@@ -66,12 +71,22 @@ namespace HealthTracker.Services
             await InitializeAsync();
             return await _database.InsertAsync(entry);
         }
+        public async Task<List<PhysicalHealthEntry>> GetAllPhysicalHealthEntriesAsync()
+        {
+            await InitializeAsync();
+            return await _database.Table<PhysicalHealthEntry>().OrderByDescending(e => e.CreateDate).ToListAsync();
+        }
 
         // --- Emotional Health Methods ---
         public async Task<int> SaveEmotionalHealthEntryAsync(EmotionalHealthEntry entry)
         {
             await InitializeAsync();
             return await _database.InsertAsync(entry);
+        }
+        public async Task<List<EmotionalHealthEntry>> GetAllEmotionalHealthEntriesAsync()
+        {
+            await InitializeAsync();
+            return await _database.Table<EmotionalHealthEntry>().OrderByDescending(e => e.CreateDate).ToListAsync();
         }
 
         // --- Journal Methods ---
@@ -149,6 +164,31 @@ namespace HealthTracker.Services
         {
             await InitializeAsync();
             return await _database.DeleteAsync(item);
+        }
+
+        // --- Data Import/Export Methods ---
+        public async Task ImportAllDataAsync(AllData data)
+        {
+            await InitializeAsync();
+
+            // Clear existing data
+            await _database.DeleteAllAsync<MentalHealthEntry>();
+            await _database.DeleteAllAsync<PhysicalHealthEntry>();
+            await _database.DeleteAllAsync<EmotionalHealthEntry>();
+            await _database.DeleteAllAsync<JournalEntry>();
+            await _database.DeleteAllAsync<TodoItem>();
+
+            // Insert new data
+            if (data.MentalHealthEntries?.Count > 0)
+                await _database.InsertAllAsync(data.MentalHealthEntries);
+            if (data.PhysicalHealthEntries?.Count > 0)
+                await _database.InsertAllAsync(data.PhysicalHealthEntries);
+            if (data.EmotionalHealthEntries?.Count > 0)
+                await _database.InsertAllAsync(data.EmotionalHealthEntries);
+            if (data.JournalEntries?.Count > 0)
+                await _database.InsertAllAsync(data.JournalEntries);
+            if (data.TodoItems?.Count > 0)
+                await _database.InsertAllAsync(data.TodoItems);
         }
     }
 }

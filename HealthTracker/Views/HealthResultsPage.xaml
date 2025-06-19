@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:HealthTracker.ViewModels"
+             x:Class="HealthTracker.Views.HealthResultsPage"
+             x:DataType="vm:HealthResultsViewModel"
+             Title="{Binding Title}">
+    <ScrollView>
+        <VerticalStackLayout Spacing="10" Padding="10">
+            <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" HorizontalOptions="Center" />
+
+            <CollectionView ItemsSource="{Binding FormattedData}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="vm:HealthResultDisplay">
+                        <Frame Padding="15" Margin="5" BorderColor="LightGray" CornerRadius="8">
+                            <VerticalStackLayout Spacing="8">
+                                <Label Text="{Binding Date, StringFormat='{0:MMMM dd, yyyy}'}" FontSize="Large" FontAttributes="Bold"/>
+                                <BoxView HeightRequest="1" Color="LightGray"/>
+
+                                <!-- This will list out all the questions and answers for the day -->
+                                <StackLayout BindableLayout.ItemsSource="{Binding Entries}">
+                                    <BindableLayout.ItemTemplate>
+                                        <!-- MODIFIED: Added x:DataType to fix binding error -->
+                                        <DataTemplate x:DataType="vm:DailyEntryDisplay">
+                                            <Grid Padding="5" ColumnDefinitions="*,Auto" ColumnSpacing="10">
+                                                <Label Grid.Column="0" Text="{Binding Key}" VerticalOptions="Center"/>
+                                                <Label Grid.Column="1" Text="{Binding Value}" FontAttributes="Bold" VerticalOptions="Center"/>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </BindableLayout.ItemTemplate>
+                                </StackLayout>
+
+                            </VerticalStackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+                <CollectionView.EmptyView>
+                    <Label Text="No data recorded for this category yet." HorizontalOptions="Center" VerticalOptions="Center" Margin="20"/>
+                </CollectionView.EmptyView>
+            </CollectionView>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

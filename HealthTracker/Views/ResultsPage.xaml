@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:HealthTracker.ViewModels"
+             x:Class="HealthTracker.Views.ResultsPage"
+             x:DataType="vm:ResultsViewModel"
+             Title="Results">
+    <VerticalStackLayout Spacing="10" Padding="20">
+        <Label Text="View Data" FontSize="Title" FontAttributes="Bold" />
+        <Button Text="Mental Health Results" Command="{Binding NavigateToHealthResultsCommand}" CommandParameter="Mental" />
+        <Button Text="Physical Health Results" Command="{Binding NavigateToHealthResultsCommand}" CommandParameter="Physical" />
+        <Button Text="Emotional Health Results" Command="{Binding NavigateToHealthResultsCommand}" CommandParameter="Emotional" />
+
+        <BoxView HeightRequest="1" Color="LightGray" Margin="0,20"/>
+
+        <Label Text="Manage Data" FontSize="Title" FontAttributes="Bold" />
+        <Label FontSize="Caption" TextColor="Gray"
+                   Text="Export creates a JSON file of all your data that you can save or share. Import will replace all current data with the contents of a previously exported file."/>
+        <Button Text="Export All Data" Command="{Binding ExportDataCommand}" Margin="0,10,0,0" />
+        <Button Text="Import Data" Command="{Binding ImportDataCommand}" />
+    </VerticalStackLayout>
+</ContentPage>

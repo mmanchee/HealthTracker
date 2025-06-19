@@ -31,6 +31,10 @@
             Title="Todo"
             ContentTemplate="{DataTemplate local:TodoPage}"
             Route="TodoPage" />
+        <ShellContent
+            Title="Results"
+            ContentTemplate="{DataTemplate local:ResultsPage}"
+            Route="ResultsPage" />
     </TabBar>
 
 </Shell>
