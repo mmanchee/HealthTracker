@@ -1,0 +1,26 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:HealthTracker.ViewModels"
+             x:Class="HealthTracker.Views.TodoItemDetailPage"
+             x:DataType="vm:TodoItemDetailViewModel"
+             Title="Task Details">
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="15">
+            <Label Text="Summary" />
+            <Entry Text="{Binding Summary}" IsReadOnly="{Binding IsReadOnly}" />
+
+            <Label Text="Description (optional)" />
+            <Editor Text="{Binding Description}" AutoSize="TextChanges" HeightRequest="150" IsReadOnly="{Binding IsReadOnly}"/>
+
+            <Label Text="Priority (1-High, 5-Low)"/>
+            <Grid ColumnDefinitions="*, Auto">
+                <Slider Grid.Column="0" Minimum="1" Maximum="5" Value="{Binding Priority}" IsEnabled="{Binding IsEditable}" />
+                <Label Grid.Column="1" Text="{Binding Priority, StringFormat='{0:F0}'}" VerticalOptions="Center" Margin="10,0" />
+            </Grid>
+
+            <Button Text="Save" Command="{Binding SaveCommand}" IsVisible="{Binding IsEditable}"/>
+            <Button Text="Delete" Command="{Binding DeleteCommand}" IsVisible="{Binding IsExistingItem}" BackgroundColor="Red"/>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

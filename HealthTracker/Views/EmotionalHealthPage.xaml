@@ -1,0 +1,77 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:HealthTracker.ViewModels"
+             x:Class="HealthTracker.Views.EmotionalHealthPage"
+             x:DataType="vm:EmotionalHealthViewModel"
+             Title="Emotional Health">
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="15" IsEnabled="{Binding IsFormEnabled}">
+            <Label Text="How are you feeling emotionally today?" FontSize="Title" HorizontalOptions="Center"/>
+            <Label Text="1 = Low, 5 = High" FontSize="Caption" HorizontalOptions="Center" TextColor="Gray"/>
+
+            <BoxView HeightRequest="1" Color="LightGray" />
+
+            <Grid RowDefinitions="Auto, Auto" ColumnDefinitions="*, Auto" RowSpacing="5">
+                <Label Grid.Row="0" Grid.Column="0" Text="Overall Mood" VerticalOptions="Center"/>
+                <Label Grid.Row="0" Grid.Column="1" Text="{Binding Source={x:Reference MoodSlider}, Path=Value, StringFormat='{0:F0}'}" VerticalOptions="Center"/>
+                <Slider Grid.Row="1" Grid.ColumnSpan="2" x:Name="MoodSlider" Minimum="1" Maximum="5" Value="{Binding OverallMood, Mode=TwoWay}" />
+            </Grid>
+
+            <Grid RowDefinitions="Auto, Auto" ColumnDefinitions="*, Auto" RowSpacing="5">
+                <Label Grid.Row="0" Grid.Column="0" Text="Stress Level" VerticalOptions="Center"/>
+                <Label Grid.Row="0" Grid.Column="1" Text="{Binding Source={x:Reference StressSlider}, Path=Value, StringFormat='{0:F0}'}" VerticalOptions="Center"/>
+                <Slider Grid.Row="1" Grid.ColumnSpan="2" x:Name="StressSlider" Minimum="1" Maximum="5" Value="{Binding StressLevel, Mode=TwoWay}" />
+            </Grid>
+
+            <Grid RowDefinitions="Auto, Auto" ColumnDefinitions="*, Auto" RowSpacing="5">
+                <Label Grid.Row="0" Grid.Column="0" Text="Anxiety" VerticalOptions="Center"/>
+                <Label Grid.Row="0" Grid.Column="1" Text="{Binding Source={x:Reference AnxietySlider}, Path=Value, StringFormat='{0:F0}'}" VerticalOptions="Center"/>
+                <Slider Grid.Row="1" Grid.ColumnSpan="2" x:Name="AnxietySlider" Minimum="1" Maximum="5" Value="{Binding Anxiety, Mode=TwoWay}" />
+            </Grid>
+
+            <Grid RowDefinitions="Auto, Auto" ColumnDefinitions="*, Auto" RowSpacing="5">
+                <Label Grid.Row="0" Grid.Column="0" Text="Emotional Stability" VerticalOptions="Center"/>
+                <Label Grid.Row="0" Grid.Column="1" Text="{Binding Source={x:Reference StabilitySlider}, Path=Value, StringFormat='{0:F0}'}" VerticalOptions="Center"/>
+                <Slider Grid.Row="1" Grid.ColumnSpan="2" x:Name="StabilitySlider" Minimum="1" Maximum="5" Value="{Binding EmotionalStability, Mode=TwoWay}" />
+            </Grid>
+
+            <Grid RowDefinitions="Auto, Auto" ColumnDefinitions="*, Auto" RowSpacing="5">
+                <Label Grid.Row="0" Grid.Column="0" Text="Social Connection" VerticalOptions="Center"/>
+                <Label Grid.Row="0" Grid.Column="1" Text="{Binding Source={x:Reference ConnectionSlider}, Path=Value, StringFormat='{0:F0}'}" VerticalOptions="Center"/>
+                <Slider Grid.Row="1" Grid.ColumnSpan="2" x:Name="ConnectionSlider" Minimum="1" Maximum="5" Value="{Binding SocialConnection, Mode=TwoWay}" />
+            </Grid>
+
+            <Grid RowDefinitions="Auto, Auto" ColumnDefinitions="*, Auto" RowSpacing="5">
+                <Label Grid.Row="0" Grid.Column="0" Text="Gratitude" VerticalOptions="Center"/>
+                <Label Grid.Row="0" Grid.Column="1" Text="{Binding Source={x:Reference GratitudeSlider}, Path=Value, StringFormat='{0:F0}'}" VerticalOptions="Center"/>
+                <Slider Grid.Row="1" Grid.ColumnSpan="2" x:Name="GratitudeSlider" Minimum="1" Maximum="5" Value="{Binding Gratitude, Mode=TwoWay}" />
+            </Grid>
+
+            <Grid RowDefinitions="Auto, Auto" ColumnDefinitions="*, Auto" RowSpacing="5">
+                <Label Grid.Row="0" Grid.Column="0" Text="Optimism" VerticalOptions="Center"/>
+                <Label Grid.Row="0" Grid.Column="1" Text="{Binding Source={x:Reference OptimismSlider}, Path=Value, StringFormat='{0:F0}'}" VerticalOptions="Center"/>
+                <Slider Grid.Row="1" Grid.ColumnSpan="2" x:Name="OptimismSlider" Minimum="1" Maximum="5" Value="{Binding Optimism, Mode=TwoWay}" />
+            </Grid>
+
+            <Grid RowDefinitions="Auto, Auto" ColumnDefinitions="*, Auto" RowSpacing="5">
+                <Label Grid.Row="0" Grid.Column="0" Text="Emotional Expression" VerticalOptions="Center"/>
+                <Label Grid.Row="0" Grid.Column="1" Text="{Binding Source={x:Reference ExpressionSlider}, Path=Value, StringFormat='{0:F0}'}" VerticalOptions="Center"/>
+                <Slider Grid.Row="1" Grid.ColumnSpan="2" x:Name="ExpressionSlider" Minimum="1" Maximum="5" Value="{Binding EmotionalExpression, Mode=TwoWay}" />
+            </Grid>
+
+            <Grid RowDefinitions="Auto, Auto" ColumnDefinitions="*, Auto" RowSpacing="5">
+                <Label Grid.Row="0" Grid.Column="0" Text="Self-Compassion" VerticalOptions="Center"/>
+                <Label Grid.Row="0" Grid.Column="1" Text="{Binding Source={x:Reference CompassionSlider}, Path=Value, StringFormat='{0:F0}'}" VerticalOptions="Center"/>
+                <Slider Grid.Row="1" Grid.ColumnSpan="2" x:Name="CompassionSlider" Minimum="1" Maximum="5" Value="{Binding SelfCompassion, Mode=TwoWay}" />
+            </Grid>
+
+            <Grid RowDefinitions="Auto, Auto" ColumnDefinitions="*, Auto" RowSpacing="5">
+                <Label Grid.Row="0" Grid.Column="0" Text="Emotional Regulation" VerticalOptions="Center"/>
+                <Label Grid.Row="0" Grid.Column="1" Text="{Binding Source={x:Reference RegulationSlider}, Path=Value, StringFormat='{0:F0}'}" VerticalOptions="Center"/>
+                <Slider Grid.Row="1" Grid.ColumnSpan="2" x:Name="RegulationSlider" Minimum="1" Maximum="5" Value="{Binding EmotionalRegulation, Mode=TwoWay}" />
+            </Grid>
+
+            <Button Text="Save Today's Entry" Command="{Binding SaveCommand}" Margin="0,20,0,0"/>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

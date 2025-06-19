@@ -1,0 +1,22 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:HealthTracker.ViewModels"
+             xmlns:models="clr-namespace:HealthTracker.Models"
+             x:Class="HealthTracker.Views.PastJournalsPage"
+             x:DataType="vm:PastJournalsViewModel"
+             Title="Past Journals">
+    <CollectionView ItemsSource="{Binding PastEntries}"
+                    SelectionMode="None">
+        <CollectionView.ItemTemplate>
+            <DataTemplate x:DataType="models:JournalEntry">
+                <Frame Padding="15" Margin="10" BorderColor="LightGray" CornerRadius="8">
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:PastJournalsViewModel}}, Path=ViewJournalCommand}"
+                                              CommandParameter="{Binding .}"/>
+                    </Frame.GestureRecognizers>
+                    <Label Text="{Binding CreateDate, StringFormat='{0:MMMM dd, yyyy}'}" FontSize="Large"/>
+                </Frame>
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+    </CollectionView>
+</ContentPage>

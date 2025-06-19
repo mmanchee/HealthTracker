@@ -1,0 +1,58 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:HealthTracker.ViewModels"
+             x:Class="HealthTracker.Views.PhysicalHealthPage"
+             x:DataType="vm:PhysicalHealthViewModel"
+             Title="Physical Health">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="15" IsEnabled="{Binding IsFormEnabled}">
+            <Label Text="How is your body feeling today?" FontSize="Title" HorizontalOptions="Center"/>
+            <Label Text="1 = Low, 5 = High" FontSize="Caption" HorizontalOptions="Center" TextColor="Gray"/>
+
+            <BoxView HeightRequest="1" Color="LightGray" />
+
+            <!-- Sliders -->
+            <Grid RowDefinitions="Auto, Auto" ColumnDefinitions="*, Auto" RowSpacing="5">
+                <Label Grid.Row="0" Grid.Column="0" Text="Energy Level" VerticalOptions="Center"/>
+                <Label Grid.Row="0" Grid.Column="1" Text="{Binding Source={x:Reference EnergySlider}, Path=Value, StringFormat='{0:F0}'}" VerticalOptions="Center"/>
+                <Slider Grid.Row="1" Grid.ColumnSpan="2" x:Name="EnergySlider" Minimum="1" Maximum="5" Value="{Binding EnergyLevel, Mode=TwoWay}" />
+            </Grid>
+            <Grid RowDefinitions="Auto, Auto" ColumnDefinitions="*, Auto" RowSpacing="5">
+                <Label Grid.Row="0" Grid.Column="0" Text="Sleep Quality" VerticalOptions="Center"/>
+                <Label Grid.Row="0" Grid.Column="1" Text="{Binding Source={x:Reference SleepSlider}, Path=Value, StringFormat='{0:F0}'}" VerticalOptions="Center"/>
+                <Slider Grid.Row="1" Grid.ColumnSpan="2" x:Name="SleepSlider" Minimum="1" Maximum="5" Value="{Binding SleepQuality, Mode=TwoWay}" />
+            </Grid>
+            <Grid RowDefinitions="Auto, Auto" ColumnDefinitions="*, Auto" RowSpacing="5">
+                <Label Grid.Row="0" Grid.Column="0" Text="Pain/Discomfort" VerticalOptions="Center"/>
+                <Label Grid.Row="0" Grid.Column="1" Text="{Binding Source={x:Reference PainSlider}, Path=Value, StringFormat='{0:F0}'}" VerticalOptions="Center"/>
+                <Slider Grid.Row="1" Grid.ColumnSpan="2" x:Name="PainSlider" Minimum="1" Maximum="5" Value="{Binding PainDiscomfort, Mode=TwoWay}" />
+            </Grid>
+            <Grid RowDefinitions="Auto, Auto" ColumnDefinitions="*, Auto" RowSpacing="5">
+                <Label Grid.Row="0" Grid.Column="0" Text="Hydration" VerticalOptions="Center"/>
+                <Label Grid.Row="0" Grid.Column="1" Text="{Binding Source={x:Reference HydrationSlider}, Path=Value, StringFormat='{0:F0}'}" VerticalOptions="Center"/>
+                <Slider Grid.Row="1" Grid.ColumnSpan="2" x:Name="HydrationSlider" Minimum="1" Maximum="5" Value="{Binding Hydration, Mode=TwoWay}" />
+            </Grid>
+            <Grid RowDefinitions="Auto, Auto" ColumnDefinitions="*, Auto" RowSpacing="5">
+                <Label Grid.Row="0" Grid.Column="0" Text="Physical Strength" VerticalOptions="Center"/>
+                <Label Grid.Row="0" Grid.Column="1" Text="{Binding Source={x:Reference StrengthSlider}, Path=Value, StringFormat='{0:F0}'}" VerticalOptions="Center"/>
+                <Slider Grid.Row="1" Grid.ColumnSpan="2" x:Name="StrengthSlider" Minimum="1" Maximum="5" Value="{Binding PhysicalStrength, Mode=TwoWay}" />
+            </Grid>
+            <Grid RowDefinitions="Auto, Auto" ColumnDefinitions="*, Auto" RowSpacing="5">
+                <Label Grid.Row="0" Grid.Column="0" Text="Recovery" VerticalOptions="Center"/>
+                <Label Grid.Row="0" Grid.Column="1" Text="{Binding Source={x:Reference RecoverySlider}, Path=Value, StringFormat='{0:F0}'}" VerticalOptions="Center"/>
+                <Slider Grid.Row="1" Grid.ColumnSpan="2" x:Name="RecoverySlider" Minimum="1" Maximum="5" Value="{Binding Recovery, Mode=TwoWay}" />
+            </Grid>
+
+            <!-- Pickers -->
+            <Label Text="Physical Activity" />
+            <Picker ItemsSource="{Binding ActivityOptions}" SelectedItem="{Binding PhysicalActivity}"/>
+
+            <Label Text="Appetite" />
+            <Picker ItemsSource="{Binding AppetiteOptions}" SelectedItem="{Binding Appetite}"/>
+
+            <Button Text="Save Today's Entry" Command="{Binding SaveCommand}" Margin="0,20,0,0"/>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

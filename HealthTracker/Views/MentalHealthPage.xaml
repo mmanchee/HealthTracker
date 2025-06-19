@@ -1,0 +1,74 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:HealthTracker.ViewModels"
+             x:Class="HealthTracker.Views.MentalHealthPage"
+             x:DataType="vm:MentalHealthViewModel"
+             Title="Mental Health">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="15" IsEnabled="{Binding IsFormEnabled}">
+            <Label Text="How are you feeling mentally today?" FontSize="Title" HorizontalOptions="Center"/>
+            <Label Text="1 = Low, 5 = High" FontSize="Caption" HorizontalOptions="Center" TextColor="Gray"/>
+
+            <BoxView HeightRequest="1" Color="LightGray" />
+
+            <!-- Question Template -->
+            <Grid RowDefinitions="Auto, Auto" ColumnDefinitions="*, Auto" RowSpacing="5">
+                <Label Grid.Row="0" Grid.Column="0" Text="Focus &amp; Concentration" VerticalOptions="Center"/>
+                <Label Grid.Row="0" Grid.Column="1" Text="{Binding Source={x:Reference FocusSlider}, Path=Value, StringFormat='{0:F0}'}" VerticalOptions="Center"/>
+                <Slider Grid.Row="1" Grid.ColumnSpan="2" x:Name="FocusSlider" Minimum="1" Maximum="5" Value="{Binding Focus, Mode=TwoWay}" />
+            </Grid>
+
+            <Grid RowDefinitions="Auto, Auto" ColumnDefinitions="*, Auto" RowSpacing="5">
+                <Label Grid.Row="0" Grid.Column="0" Text="Decision Making" VerticalOptions="Center"/>
+                <Label Grid.Row="0" Grid.Column="1" Text="{Binding Source={x:Reference DecisionSlider}, Path=Value, StringFormat='{0:F0}'}" VerticalOptions="Center"/>
+                <Slider Grid.Row="1" Grid.ColumnSpan="2" x:Name="DecisionSlider" Minimum="1" Maximum="5" Value="{Binding DecisionMaking, Mode=TwoWay}" />
+            </Grid>
+
+            <Grid RowDefinitions="Auto, Auto" ColumnDefinitions="*, Auto" RowSpacing="5">
+                <Label Grid.Row="0" Grid.Column="0" Text="Memory" VerticalOptions="Center"/>
+                <Label Grid.Row="0" Grid.Column="1" Text="{Binding Source={x:Reference MemorySlider}, Path=Value, StringFormat='{0:F0}'}" VerticalOptions="Center"/>
+                <Slider Grid.Row="1" Grid.ColumnSpan="2" x:Name="MemorySlider" Minimum="1" Maximum="5" Value="{Binding Memory, Mode=TwoWay}" />
+            </Grid>
+
+            <Grid RowDefinitions="Auto, Auto" ColumnDefinitions="*, Auto" RowSpacing="5">
+                <Label Grid.Row="0" Grid.Column="0" Text="Mental Clarity" VerticalOptions="Center"/>
+                <Label Grid.Row="0" Grid.Column="1" Text="{Binding Source={x:Reference ClaritySlider}, Path=Value, StringFormat='{0:F0}'}" VerticalOptions="Center"/>
+                <Slider Grid.Row="1" Grid.ColumnSpan="2" x:Name="ClaritySlider" Minimum="1" Maximum="5" Value="{Binding MentalClarity, Mode=TwoWay}" />
+            </Grid>
+
+            <Grid RowDefinitions="Auto, Auto" ColumnDefinitions="*, Auto" RowSpacing="5">
+                <Label Grid.Row="0" Grid.Column="0" Text="Problem Solving" VerticalOptions="Center"/>
+                <Label Grid.Row="0" Grid.Column="1" Text="{Binding Source={x:Reference ProblemSlider}, Path=Value, StringFormat='{0:F0}'}" VerticalOptions="Center"/>
+                <Slider Grid.Row="1" Grid.ColumnSpan="2" x:Name="ProblemSlider" Minimum="1" Maximum="5" Value="{Binding ProblemSolving, Mode=TwoWay}" />
+            </Grid>
+
+            <Grid RowDefinitions="Auto, Auto" ColumnDefinitions="*, Auto" RowSpacing="5">
+                <Label Grid.Row="0" Grid.Column="0" Text="Mental Energy" VerticalOptions="Center"/>
+                <Label Grid.Row="0" Grid.Column="1" Text="{Binding Source={x:Reference EnergySlider}, Path=Value, StringFormat='{0:F0}'}" VerticalOptions="Center"/>
+                <Slider Grid.Row="1" Grid.ColumnSpan="2" x:Name="EnergySlider" Minimum="1" Maximum="5" Value="{Binding MentalEnergy, Mode=TwoWay}" />
+            </Grid>
+
+            <Grid RowDefinitions="Auto, Auto" ColumnDefinitions="*, Auto" RowSpacing="5">
+                <Label Grid.Row="0" Grid.Column="0" Text="Learning" VerticalOptions="Center"/>
+                <Label Grid.Row="0" Grid.Column="1" Text="{Binding Source={x:Reference LearningSlider}, Path=Value, StringFormat='{0:F0}'}" VerticalOptions="Center"/>
+                <Slider Grid.Row="1" Grid.ColumnSpan="2" x:Name="LearningSlider" Minimum="1" Maximum="5" Value="{Binding Learning, Mode=TwoWay}" />
+            </Grid>
+
+            <Grid RowDefinitions="Auto, Auto" ColumnDefinitions="*, Auto" RowSpacing="5">
+                <Label Grid.Row="0" Grid.Column="0" Text="Overwhelm" VerticalOptions="Center"/>
+                <Label Grid.Row="0" Grid.Column="1" Text="{Binding Source={x:Reference OverwhelmSlider}, Path=Value, StringFormat='{0:F0}'}" VerticalOptions="Center"/>
+                <Slider Grid.Row="1" Grid.ColumnSpan="2" x:Name="OverwhelmSlider" Minimum="1" Maximum="5" Value="{Binding Overwhelm, Mode=TwoWay}" />
+            </Grid>
+
+            <Grid RowDefinitions="Auto, Auto" ColumnDefinitions="*, Auto" RowSpacing="5">
+                <Label Grid.Row="0" Grid.Column="0" Text="Mental Resilience" VerticalOptions="Center"/>
+                <Label Grid.Row="0" Grid.Column="1" Text="{Binding Source={x:Reference ResilienceSlider}, Path=Value, StringFormat='{0:F0}'}" VerticalOptions="Center"/>
+                <Slider Grid.Row="1" Grid.ColumnSpan="2" x:Name="ResilienceSlider" Minimum="1" Maximum="5" Value="{Binding MentalResilience, Mode=TwoWay}" />
+            </Grid>
+
+            <Button Text="Save Today's Entry" Command="{Binding SaveCommand}" Margin="0,20,0,0"/>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

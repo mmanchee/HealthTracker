@@ -1,0 +1,76 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:HealthTracker.ViewModels"
+             xmlns:models="clr-namespace:HealthTracker.Models"
+             x:Class="HealthTracker.Views.TodoPage"
+             x:DataType="vm:TodoViewModel"
+             Title="Todo List">
+    <Grid RowDefinitions="Auto, *, Auto, *">
+        <!-- Toolbar for adding new items -->
+        <Button Grid.Row="0" Text="+ Add New Task" Command="{Binding AddItemCommand}" Margin="20,10" />
+
+        <!-- Current Items -->
+        <Label Grid.Row="1" Text="Current" FontSize="Large" FontAttributes="Bold" Margin="20,10,20,5" VerticalOptions="Start"/>
+        <CollectionView Grid.Row="1" ItemsSource="{Binding CurrentItems}" Margin="10,45,10,10" SelectionMode="None">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:TodoItem">
+                    <Frame Padding="10" Margin="5" BorderColor="LightGray" CornerRadius="8">
+                        <Grid ColumnDefinitions="*, Auto, Auto">
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:TodoViewModel}}, Path=ViewItemCommand}"
+                                                      CommandParameter="{Binding .}"/>
+                            </Grid.GestureRecognizers>
+                            <VerticalStackLayout>
+                                <Label Text="{Binding Summary}" FontAttributes="Bold" />
+                                <Label FontSize="Small">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="Priority: "/>
+                                            <Span Text="{Binding Priority}"/>
+                                            <Span Text="  |  Created: "/>
+                                            <Span Text="{Binding CreateDate, StringFormat='{0:MM/dd}'}"/>
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                            </VerticalStackLayout>
+                            <Button Grid.Column="1" Text="?" 
+                                     Command="{Binding Source={RelativeSource AncestorType={x:Type vm:TodoViewModel}}, Path=CompleteItemCommand}"
+                                     CommandParameter="{Binding .}" 
+                                     WidthRequest="50" HeightRequest="50" CornerRadius="25" Margin="5,0"/>
+                        </Grid>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <BoxView Grid.Row="2" HeightRequest="1" Color="LightGray" Margin="20,0"/>
+
+        <!-- Completed Items -->
+        <Label Grid.Row="3" Text="Completed" FontSize="Large" FontAttributes="Bold" Margin="20,10,20,5" VerticalOptions="Start"/>
+        <CollectionView Grid.Row="3" ItemsSource="{Binding CompletedItems}" Margin="10,45,10,10" SelectionMode="None">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:TodoItem">
+                    <Frame Padding="10" Margin="5" BackgroundColor="LightGray" CornerRadius="8">
+                        <Grid>
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:TodoViewModel}}, Path=ViewItemCommand}"
+                                                      CommandParameter="{Binding .}"/>
+                            </Grid.GestureRecognizers>
+                            <VerticalStackLayout>
+                                <Label Text="{Binding Summary}" TextDecorations="Strikethrough"/>
+                                <Label FontSize="Small">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="Completed: "/>
+                                            <Span Text="{Binding CompleteDate, StringFormat='{0:MM/dd}'}"/>
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                            </VerticalStackLayout>
+                        </Grid>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+</ContentPage>
